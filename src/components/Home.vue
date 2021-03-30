@@ -109,6 +109,7 @@ export default {
         };
     },
     methods: {
+        // parse room size
         parseRoomSize() {
             let roomLimits = this.roomSize.split("x")
             this.maxX = parseInt(roomLimits[0])
@@ -123,6 +124,8 @@ export default {
             }
             return true
         },
+
+        //parse the robot location
         parseRobotLocation() {
             let robotLocation = this.robotStartLocation.split(",")
             this.robotPos.curX = parseInt(robotLocation[0])
@@ -142,6 +145,8 @@ export default {
             return true
 
         },
+
+        // verify each direction
         verifyDirection() {
             if (!this.robotDirections.includes(this.robotStartDirection)) {
                 alert('direction has to be North/East/South/West')
@@ -150,6 +155,8 @@ export default {
             this.robotPos.curDir = this.robotStartDirection
             return true
         },
+
+        // verify commands
         verifyCommands() {
             let commands = this.robotCommandString.split("")
             for (let command of commands) {
@@ -161,6 +168,8 @@ export default {
             this.robotCommands = commands
             return true
         },
+
+        // run commands
         runCommands() {
             for (let command of this.robotCommands) {
                 // console.log(command)
@@ -175,6 +184,8 @@ export default {
                 }
             }
         },
+
+        // check reseults from each function
         checkResults() {
             if (this.parseRoomSize() === false) {
                 return
@@ -192,6 +203,8 @@ export default {
             console.log(`Result: X ${this.robotPos.curX} Y ${this.robotPos.curY} DIR ${this.robotPos.curDir}`)
             this.robotEndPosition = `${this.robotPos.curX}, ${this.robotPos.curY} ${this.robotPos.curDir}`
         },
+
+        // turn right command
         turnRight(robotPos) {
             if (robotPos.curDir === "North") {
                 robotPos.curDir = "East";
@@ -205,6 +218,8 @@ export default {
                 throw console.error();
             }
         },
+
+        // turn left command
         turnLeft(robotPos) {
             if (robotPos.curDir === "North") {
                 robotPos.curDir = "West";
@@ -218,6 +233,8 @@ export default {
                 throw console.error();
             }
         },
+
+        // walk forward command
         walkForward(robotPos) {
             if (robotPos.curDir === 'North') {
                 robotPos.curY -= 1
